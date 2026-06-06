@@ -1,0 +1,50 @@
+
+# --- Gegebene Werte ---
+U =  230.0   # Spannung in Volt
+R1 = 47.0    # Widerstand R1 in Ohm
+R2 = 33.0    # Widerstand R2 in Ohm
+R3 = 100.0   # Widerstand R3 in Ohm
+
+# --- Addition / Subtraktion / Division / Multiplikation ---
+R_reihe = R1 + R2 + R3  # Gesamtwiderstand der Reihenschaltung
+I_reihe = U / R_reihe  # Strom in der Reihenschaltung
+U1_reihe = I_reihe * R1  # Spannung über R1
+U2_reihe = I_reihe * R2  # Spannung über R2
+U3_reihe = I_reihe * R3  # Spannung über R3
+
+print("R_gesamt(Reihe):", R_reihe, "Ohm")
+print("I_gesamt(Reihe):", round(I_reihe, 3), "A")
+print("U1_gesamt(Reihe):", round(U1_reihe, 2), "V")
+print("U2_gesamt(Reihe):", round(U2_reihe, 2), "V")
+print("U3_gesamt(Reihe):", round(U3_reihe, 2), "V")
+
+# --- Berechnung des Spannungsabfalls über R1  durch die Spannungsteilung über das Verhältnis der Widerstände ---
+U_abfall_R1 = U - (U * R2/R_reihe + U * R3/R_reihe)
+print("Spannungsabfall über R1:", round(U_abfall_R1, 2), "V")
+
+# -- Berechnung der Leistung ---
+
+P1 = U * I_reihe            # P = U * I
+P2 = U**2 / R_reihe         # P = U^2 / R
+P3 = I_reihe**2 * R_reihe   # P = I^2 * R
+
+print("Leistung P(U*I):", round(P1, 2), "W")
+print("Leistung P(U²/R):", round(P2, 2), "W")
+print("Leistung P(I²*R):", round(P3, 2), "W")
+
+# --- Ganzzahldivision // und Modulo % ---
+# Wie viel ganze 10 Ohm Widerstände können wir in R_reihe unterbringen?
+stufen = int(R_reihe) // 10
+rest = int(R_reihe) % 10
+print("Anzahl 10 Ohm Stufen in R_reihe:", stufen)
+print("Restwiderstand nach 10 Ohm Stufen:", rest, "Ohm")
+
+# -- Parallelschaltung ---
+R_parallel = 1 /(1/R1 + 1/R2 + 1/R3)  # Gesamtwiderstand der Parallelschaltung
+print("R_gesamt(Parallel):", round(R_parallel, 2), "Ohm")
+
+leistung_gesamt = 0.0
+leistung_gesamt += P1    # gleichbedeutend mit leistung_gesamt = leistung_gesamt + P1
+# leistung_gesamt +=P2
+# leistung_gesamt +=P3
+print("Gesamtleistung:", round(leistung_gesamt, 2), "W")
