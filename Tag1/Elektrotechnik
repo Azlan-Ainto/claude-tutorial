@@ -1,0 +1,35 @@
+
+# --- Variablen deklarieren ---
+# int -> ganze Zahlen (Stückzahl, Kennziffern,...)
+anzahl_widerstaende = 4
+bauteil_nummer = 2200
+
+# float -> Kommazahlen (Messwerte, pyhsikalische Größen,...)
+spannung_netz = 230.0   # Volt(Netzspannung)
+widerstand = 47.0       # Ohm
+toleraz = 0.05          # 5% Toleranz
+# str -> Text ( Namen, Einheiten, Beschriftungen....)
+bauteilname = "Metallschichtwiderstand"
+einheit_strom = "Ampere"
+hersteller = "Vishay"
+# bool -> Wahrheitswerte (Zustand, Schalter)
+ist_verbaut = True
+ist_defekt = False
+# --- Typ ermitteln mit type() ---
+print("Typ von spannung_netz:", type(spannung_netz))
+print("Typ von bauteilname:", type(bauteilname))
+
+# --- Werte asugeben ---
+print("Bauteil:", bauteilname)
+print("Spannung:", spannung_netz, "V")
+print("Widerstand:", widerstand,"Ohm")
+print("Anzahl:", anzahl_widerstaende,"Stück")
+print("Verbaut:", ist_verbaut)
+# --- Werte ändern ---
+spannung_netz = 24.0    # Jetzt 24V DC (Industrieversorgung)
+print("Neu Spannung:", spannung_netz, "V")
+
+# --- Mehrfachzuweisung ---
+r1 = r2 = r3 = 100.0  # Alle drei Widerstände haben 100 Ohm
+print("R1,R2,R3:",r1,r2,r3)
+

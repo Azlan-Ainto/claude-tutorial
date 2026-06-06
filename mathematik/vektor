@@ -1,0 +1,13 @@
+# ❌ Ohne Vektorrechnung
+# Naiver Ansatz — explizite Schleifen, keine Struktur
+produkte = [
+    {"name": "Produkt A", "menge": 50,  "preis": 2.50},
+    {"name": "Produkt B", "menge": 20,  "preis": 19.99},
+    {"name": "Produkt C", "menge": 100, "preis": 0.80},
+]
+gesamtwert = 0
+for produkt in produkte:
+    gesamtwert += produkt["menge"] * produkt["preis"]
+print()
+print(f"Gesamtwert: {gesamtwert:.2f} €")
+# Ausgabe: 650.80 €
