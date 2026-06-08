@@ -1,0 +1,40 @@
+import random as rnd
+# --- seed für Reprouzierbarkeit ---
+rnd.seed(42)
+# --- 1.Würfelwurf: Zufällige Störereignisse ----
+print("\n=== Störereignis-Simulation ===")
+ereignis = rnd.randint(1,6)
+print(f"Störpegel-Stufe: {ereignis} / 6")
+# --- 2.Netzspannung mit Rauschen (uniform) ----
+for i in range(1,6):
+    u = rnd.uniform(218.0, 242) # ±5 Toleranz um 230 V
+    print(f" Messung {i}: U={u:.2f} V")
+
+# --- Lastspitzen simulieren ----
+grundlast_kw = 50.0
+for stunde in range(1,6):
+    spitze = grundlast_kw * (1.0 + rnd.random()*0.4) # +0... 40%
+    print(f"Stunde  {stunde:02d}: {spitze: .1f} kw")
+# --- 4. Zufälliges Bauteil aus der Liste wählen ----
+print("\n=== Bauteil-Zufufallsprüfung ===")
+bauteile = ["Widerstand", "Kondensator", "Spule", "Diode", "Transistor"]
+pruefling = rnd.choice(bauteile)
+print(f"Zufällig gewähltes Prüfbauteil: {pruefling}")
+# --- 6. Temperatursensor-Rauschen simulieren ----
+print("\n=== Temperatursensor BME280 (simuliert) ===")
+soll_temp = 85.0    # °C Sollwert
+for n in range(1,6):
+    rauschen = rnd.uniform(-0.5, 0.5)
+    messwert = soll_temp + rauschen
+    print(f" Sensor {n}: {messwert:.3f} °C (Rauschen: {rauschen:+.3f})")
+
+# --- Motorlast-Simulation ---
+rnd.seed(7)
+print(f"\n{'Messungen':<10} {'Drehzahl RPM ':<20} {'Drehmoment Nm':<20}{'Wellenleistung Watt':<10}")
+for i in range(1,7):
+    drehzahl = rnd.randint(1200, 3000) # RPM
+    drehmoment = rnd.uniform(10.0, 80.0)    # Nm
+    wellenleistung =  (2*3.14159*drehzahl*drehmoment)/60 # Watt
+    print(f"{i:<10} {drehzahl:<20} {drehmoment:<20.3f}{wellenleistung:<10.3f}")
+
+   

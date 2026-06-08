@@ -1,0 +1,39 @@
+
+# === Sensor shickt Daten als Text-Strings ===
+# z.B über serielle Schnittstelle, Protokoo
+
+sensor_temperatur = "23.75" # °C kommt als str an
+sensor_druck = "1013"   #hPa kommt als str an
+sensor_aktiv = "1"  # 0/1 Statusbit
+sensor_name = "BME280"  #Bezeichnung
+
+# --- Typen vor Konvertierung prüfen ----
+print("Typ vor Konvertierung:", type(sensor_temperatur))
+# --- Konvertierung: str -> float / int / bool ----------
+temperatur = float(sensor_temperatur)
+druck = int(sensor_druck)
+aktiv = bool(int(sensor_aktiv))
+
+print("Typ nach Konvertierung:", type(temperatur))
+# --- Umrechnung: Temperatur Fahrenheit und Kelvin -----
+temp_kelvin = temperatur + 273.15   # K
+temp_fahrenheit = temperatur * 9/5 +32 # °F
+# --- isinstance() zur sicheren Typprüfung -----
+print(f"Ist float? {isinstance(temperatur, float)}")
+print(f"ist int? {isinstance(druck, int)}")
+# --- Rückgkonvertierung: Zahl -> str für Ausgabe -----
+bericht_zeile = ("Senor: "+sensor_name + " | T=" + str(round(temperatur,1))+ "°C" + " |P=" +str(druck) + "hPa")
+print(bericht_zeile)
+# --- Ausgabe als Messprotokoll -----------------------
+print()
+print("=" * 36)
+print(f"Sensor: {sensor_name}")
+print(f"Aktiv: {aktiv}")
+print("-" * 36)
+print(f"Temperatur : {temperatur:.2f} °C")
+print(f"Temperatur : {temp_kelvin:.2f} K")
+print(f"Temperatur: {temp_fahrenheit:.2f} °F")
+print(f"Luftdruck: {druck} hPa")
+print("=" * 36)
+
+
