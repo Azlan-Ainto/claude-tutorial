@@ -1,0 +1,56 @@
+import random
+random.seed()
+print("\n=== CNC-Maschine Fehlerdiagnose ===")
+fehler_codes = [0,101,202,303,404, 999]
+code = random.choice(fehler_codes)
+print(f"Fehlercode: {code}")
+match code:
+    case 0:
+        print(f"{chr(9989)} Kein Fehler - Maschine betriebsbereit")
+    case 101:
+        print(f"{chr(9888)} Achse X - Positionsfehler")
+    case 202:
+        print(f"{chr(9888)} Kühlmitteldruch zu niedrig")
+        print(f"{chr(10145)} Maßnahme: Werkzeug wechslen")
+    case 303:
+        print(f"{chr(9888)} Werkzeugbruch erkannt (Sensor A/B)")
+        print(f"{chr(128736)} Maßnahme: Werkzeug wechseln")
+    case 404:
+        print(f"{chr(9940)} Spindel-Überhitzung - Notaus")
+        print(f"{chr(128736)} Maßnahme: Werkzeug wechseln. ")
+    case 505:
+        print(f"{chr(128736)} Schutzgiter offen - Sicherheitshalt")
+        print(f"{chr(128736)} Maßnahme: Gitter schließen & quittieren")
+    case _:
+        print(f"{chr(10060)} Unbekannter Code {code} - Service rufen")
+
+# ----------- Betriebsmodus Steuerung -----------------------------------
+print()
+print("\n=== Antriebsmodus Steuerung ===")
+modus = random.choice(["AUTO", "MNAUELL","EINRICHTEN", "NOTAUS"])
+print(f"Modus: {modus}")
+match modus:
+    case "AUTO":
+        print(f"{chr(129302)} Automatikbetrieb -max. 3000 RPM")
+    case "MANUELL" :
+        print(f"{chr(129504)} Handbetrieb - max.1500 RPM")
+    case "EINRICHTEN":
+        print(f"{chr(9888)} Einrichtbetrieb - max. 200 RPM (Tippbetrieb)")
+    case "NOTAUS":
+        print(f"{chr(9940)} NOT-AUS- alle Antriebe gesperrt")
+    case _:
+        print(f"{chr(9889)} Ungültig - Standardmosus AUTO aktiviert")
+
+# -------- Druck und Temperatur prüfen -----
+print("\n ======== Ventilsteuerung =========")
+zustand =("HOCH","NORMAL")
+print(f"(Druck, Temp) : {zustand}")
+match zustand:
+    case("HOCH", "HOCH"):
+         print(f"{chr(9940)} Kritisch - Notventil öffnen")
+    case("HOCH","NORMAL"):
+        print(f"{chr(9888)} Überdruck - Druckventil öffnen")
+    case("NORMAL","HOCH") :
+        print(f"f{chr(9888)} Überhitzung - Kühlventil öffnen")
+    case("NORMAL", "NORMAL"):
+        print(f"{chr(9989)} Alles normal")

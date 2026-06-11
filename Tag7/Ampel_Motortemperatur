@@ -1,0 +1,71 @@
+import random as rnd
+rnd.seed(3)
+# === Beispiel 1: Ampelsteuerung ===========
+print("=== Ampelstuerung ====")
+phase = rnd.choice(["ROT", "ROT_GELB", "GRUEN", "GELB"])
+print(f"Aktuelle Phase: {phase}")
+if phase == "ROT":
+    print(f"-> STOP ! Fahrzeug anhalten.")
+elif phase == "ROT_GELB" : 
+    print("-> ACHTUNG: Motor starten, gleich grün.")
+elif phase == "GRUEN":
+    print(f"-> FAHREN erlaubt.")
+elif phase == "GELB":
+    print("-> BREMSEN: Kreuzung wird gesperrt.")
+else:
+    print("-> FEHLER: unbekannte Ampelphase !")
+
+# Beispiel 2: Motortemperatur Überwachung
+print("\n=== Motortemperatur Überwachung ====")
+temperatur = rnd.uniform(60.0, 120.0)
+print(f"Gemessene Temperatur: {temperatur:.1f} °C")
+
+if temperatur > 110.0:
+    print("🚨 NotAbschaltung - Überhitzung!")
+    status = "ABGESCHALTET"
+elif temperatur > 95.0:
+    print("⚠️ WARNUNG - Lüfter auf 100%")
+    status = "WARNUNG"
+elif temperatur > 80.0:
+    print("⚡ERÖHT- Lüfter auf 60%")
+    status = "ERHÖHT"
+else:
+    print("✓ NORMAL - Lüfter auf 20%")
+    status = "NORMAL"
+print(f"Motorstatus: {status}")
+
+# === Beispiel 3: Spannungsbereich prüen ====
+print("\n=== Netzspannungs-Kontrolle ===")
+rnd.seed()
+u_netz = rnd.uniform(200.0, 260.0)
+print(f"Netzspannung: {u_netz:.1f} V")
+
+if u_netz < 207.0:
+    print("Unterspannung - USV aktiviert")
+elif u_netz > 253.0:
+    print("Überspannung - Varisator aktiv")
+else:
+    abweichung = u_netz - 230.0
+    print(f"Spannung OK (Abweichung: {abweichung:+.1f} V)")
+
+# === Beispiel 4: Sicherungsautomaten-Simulation ===
+rnd.seed()
+I = int(rnd.uniform(0,25))
+
+I_nenn = 16              # Ampere  A
+last = I / I_nenn * 100     # in %
+
+print("\n=== Sicherungsautomaten-Simulation ===")
+print(f"I = {I}")
+if I == 16:
+    print(f"ÜBERLAST: thermisch ausgelöst")
+    status = "ÜBERLAST"
+elif I == 20:
+    print(f"KURZSCHLUSS: sofort ausgelöst")
+    status = "KURZSCHLUSS"
+elif I == 12 :
+    print(f"ERHÖHT: Überwachung aktiv.")
+    status = "ERHÖHT" 
+else:
+    print(f"NORMAL - Betrieb OK")
+    status = "NORMAL"
