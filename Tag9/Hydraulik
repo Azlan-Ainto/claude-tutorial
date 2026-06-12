@@ -1,0 +1,52 @@
+
+import random
+random.seed()
+
+#------ Messwerte simulieren --------
+druck = random.uniform(80.0, 320.0) # bar
+temperatur = random.uniform(20.0, 100.0) # °C
+fuellstand = random.uniform(0.0, 100.0) # %
+pumpe_aktiv = random.choice([True, False])
+
+print("\n")
+print(f"Druck: {druck:.1f} bar")
+print(f"Temperatur: {temperatur:.1f} °C")
+print(f"Füllstand: {fuellstand:.1f} %")
+print(f"Pumpe: {pumpe_aktiv}")
+print("-" *35)
+print("\n")
+# =================================================
+print("\n[Vergleiche]")                            
+print(f"druck == 200: {druck == 200}")
+print(f"druck != 200: {druck != 200}")
+print(f"druck > 250: {druck > 250}")
+print(f"druck <=150: {druck <=150}")
+# ================================================
+
+print("\n Bereichsprüfung")
+normbereich = 100.0 <= druck <= 250.0
+temp_ok = 10.0 <= temperatur <= 80.0
+system_ok = normbereich and temp_ok and pumpe_aktiv
+
+
+print(f"Druck im Normbereich (100-250 bar): {normbereich}")
+print(f"Temperatur OK (10-80 °C) : {temp_ok}")
+print(f"System betriebsbereit: {system_ok}")
+
+
+if druck > 280.0 and temperatur > 75.0:
+    print(f"{chr(9888)} Kritisch: Hoher Druck + Überhitzung")
+elif druck > 280.0:
+    print(f"{chr(29888)} Druckventil öffnen")
+else:
+    print(f"{chr(9989)} Füllstand OK: {fuellstand:.1f} %")
+
+
+alarm = druck > 280.0 or temperatur > 280.0 or fuellstand < 15.0
+print(f"Mindestens ein Alarm aktiv: {alarm}")
+if fuellstand < 10.0 or fuellstand > 95.0:
+    print("⚠ Füllstand kritisch (zu leer oder zu voll)")
+else:
+    print(f"✓ Füllstand OK: {fuellstand:.1f} %")
+
+
