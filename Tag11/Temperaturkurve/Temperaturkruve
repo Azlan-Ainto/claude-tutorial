@@ -2,22 +2,25 @@
 import random as rnd
 import math
 rnd.seed(11)
-
 # ...... Temperaturkurve ..............
 print()
-print("\n===== Abkühlkurve eines Stahlbolzens ===")
-print(f"{'Zeit':>8} {'Temp':>8} {'Balkengraph':>16}")
+print("\n===== Abkühlkurve eines Stahlbolzens ===\n")
+print(f"{'Zeit':>8} {'Temp':>8} {'Abkühlbalken':>16}")
 print("-"*44)
 
-T_start = 850.0     # °C
+T_start = 850.0     # °C 
 k = 0.08            # Abkühlkonstante
 T_umg = 20.0        # °C Umgebungstemperatur
 
+# ...... ANSI-Farben .......
+ROT = "\033[31m"
+BLAU = "\033[34m" 
+RESET = "\33[0m"
 for t in range(0,55,5):
-    # Newtonische Abkühlformel: T(t) = T_umg + (T_start - T_umg)* e^(-k*t)
+    # Newtonsche Abkühlformel: T(t) = T_umg + (T_start - T_umg)* e^(-k*t)
     T = T_umg + (T_start - T_umg) * math.exp(-k*t)
     balken = f"{chr(9608)}" * int(T/50)
-    print(f"{t:4} min {T:7.1f} C° {balken}")
+    print(f"{t:4} min {BLAU}{T:7.1f} C°{RESET} {ROT}{balken}{RESET}")
     print()
 
 
