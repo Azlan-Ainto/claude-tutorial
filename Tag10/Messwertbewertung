@@ -1,0 +1,51 @@
+import random as rnd
+rnd.seed()
+# ====== Widerstandsmessung - IO / NIO ========
+print("\n=== Widerstandsprüfung ===\n")
+soll = 100.0        # Ohm
+tol = 0.05          # 5%
+grenze = soll * tol
+# ---- Symbole -------------------
+io = chr(9989)      # ✔                  
+#nio = chr(10006)    # ✖           
+widerstand_io = chr(9608)   # █
+widerstand_nio = chr(9618)  # ▒
+delta = chr(916)
+ohm = chr(937)
+nio = "❌"
+# --------------------------------  
+for nr in range(1,7):
+    messwert = rnd.uniform(93.0, 108.0)
+    abweichung = abs(messwert - soll)
+    urteil = f"{io} IO" if abweichung <= grenze else f"{nio} NIO"
+    symbol = f"{widerstand_io}" if abweichung <= grenze else f"{widerstand_nio}"
+    print(f"\nBauteil {nr}: {messwert:6.2f} {ohm} {delta:>5} {abweichung:4.2f} {symbol:>5} {urteil:>5}")
+print()
+# ======== Spannunggsklassifikation ============
+print("\n======= Spannungsklassen (IEC 60038) =======")
+spannungen = [11.5, 48.0, 230.0, 400, 10000.0]
+for u in spannungen:
+    bereich ="Niederspannung" if u <= 1000 else "Hochspannung"
+    sicher = "Schutzkleinspannung" if u <= 50 else bereich
+    print(f"{u:8.1f} V -> {sicher}")
+# .................................................................
+
+print("\n======= Motortemperatur-Schnelllchek ===")
+# ............. Symbole ............................................
+alarm = chr(0x26D4)
+ok = chr(0x2705)
+warn = chr(0x26A0)
+# ....................................................................
+for _ in range(4):
+    t = rnd.uniform(60.0,115.0)
+    symbol = alarm if t>100 else warn if t>85 else ok
+    label = "ALARM" if t>100 else "WARM" if t > 85 else "OK"
+    print(f"T={t:.1f}°C -> {symbol} {label}")
+    
+# ............ PWM-Signalbegrenzung ...................................
+print("\n==== PWM-Singnalbegrenzung(0-100%) ====")
+
+for _ in range(4):
+    rohwert = rnd.uniform(-20,120)
+    pwm = 0 if rohwert < 0 else(100 if rohwert >100 else rohwert)
+    print(f"Roh: {rohwert:7.1f}% ->PWM: {pwm:5.1f}%")
